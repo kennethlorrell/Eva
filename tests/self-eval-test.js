@@ -1,6 +1,6 @@
-const assert = require('assert');
+const testUtil = require('./test-util');
 
 module.exports = (eva) => {
-  assert.strictEqual(eva.eval(1), 1);
-  assert.strictEqual(eva.eval('"hello"'), 'hello');
+  testUtil.test(eva, `1`, 1);
+  testUtil.test(eva, `"hello"`, 'hello');
 };

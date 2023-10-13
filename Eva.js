@@ -1,4 +1,5 @@
 const Environment = require('./Environment');
+const Transformer = require('./Transformer');
 
 /**
  * Eva interpreter
@@ -10,6 +11,7 @@ class Eva {
    */
   constructor(global = GlobalEnvironment) {
     this.global = global;
+    this._transformer = new Transformer();
   }
 
   /**
@@ -78,12 +80,38 @@ class Eva {
     //
     // Syntactic sugar for: (var square (fn (x) (* x x)))
     if (exp[0] === 'def') {
-      const [_tag, name, params, body] = exp;
-
       // JIT-transpile to a variable declaration
-      const varExp = ['var', name, ['fn', params, body]];
+      const varExp = this._transformer.transformDefToFn(exp);
 
       return this.eval(varExp, env);
+    }
+
+    // Switch expression
+    if (exp[0] === 'switch') {
+      const ifExp = this._transformer.transformSwitchToIf(exp);
+
+      return this.eval(ifExp, env);
+    }
+
+    // For loop
+    if (exp[0] === 'for') {
+      const resultExp = this._transformer.transformForToWhile(exp);
+
+      return this.eval(resultExp, env);
+    }
+
+    // Increment
+    if (exp[0] === '++') {
+      const setExp = this._transformer.transformIncrementToSet(exp);
+
+      return this.eval(setExp, env);
+    }
+
+    // Decrement
+    if (exp[0] === '--') {
+      const setExp = this._transformer.transformDecrementToSet(exp);
+
+      return this.eval(setExp, env);
     }
 
     // Anonymous function: (fn (x) (* x x))

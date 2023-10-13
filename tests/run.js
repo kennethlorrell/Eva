@@ -6,10 +6,12 @@ const tests = [
   require('./variables-test'),
   require('./block-test'),
   require('./if-test'),
-  require('./while-test'),
+  require('./loop-test'),
   require('./built-in-function-test'),
   require('./user-defined-function-test'),
   require('./anonymous-function-test'),
+  require('./switch-test'),
+  require('./operations-test'),
 ]
 
 const eva = new Eva();

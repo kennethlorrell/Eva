@@ -1,5 +1,6 @@
 const Environment = require("../Environment");
 const Eva = require("../Eva");
+
 const tests = [
   require('./self-eval-test'),
   require('./math-test'),
@@ -11,14 +12,11 @@ const tests = [
   require('./user-defined-function-test'),
   require('./anonymous-function-test'),
   require('./operations-test'),
+  require('./class-test'),
 ]
 
 const eva = new Eva();
 
-tests.forEach(
-  (test) => test(eva)
-);
-
-eva.eval(['print', '"Hello,"', '"World!"']);
+tests.forEach((test) => test(eva));
 
 console.log('All assertions passed!');

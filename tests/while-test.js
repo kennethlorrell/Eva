@@ -1,17 +1,17 @@
-const testUtil = require('./test-util');
+const { test } = require('./test-util');
 
 module.exports = (eva) => {
-  testUtil.test(eva, `
-  (begin
-    (var counter 0)
-    (var result 0)
-    
-    (while (< counter 10)
-      (set result (+ result 1))
-      (set counter (+ counter 1))
+  test(eva, `
+    (begin
+      (var counter 0)
+      (var result 0)
+      
+      (while (< counter 10)
+        (set result (+ result 1))
+        (set counter (+ counter 1))
+      )
+  
+      result
     )
-
-    result
-  )
   `, 10);
 };

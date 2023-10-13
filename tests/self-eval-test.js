@@ -1,6 +1,6 @@
-const testUtil = require('./test-util');
+const { test } = require('./test-util');
 
 module.exports = (eva) => {
-  testUtil.test(eva, `1`, 1);
-  testUtil.test(eva, `"hello"`, 'hello');
+  test(eva, `1`, 1);
+  test(eva, `"hello"`, 'hello');
 };

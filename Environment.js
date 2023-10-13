@@ -23,7 +23,9 @@ class Environment {
    * Updates an existing variable
    */
   assign(name, value) {
-    return this.resolve(name).record[name] = value;
+    this.resolve(name).record[name] = value;
+
+    return value;
   }
 
   /**

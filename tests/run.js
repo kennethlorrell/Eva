@@ -6,17 +6,17 @@ const tests = [
   require('./variables-test'),
   require('./block-test'),
   require('./if-test'),
+  // require('./while-test'),
+  require('./built-in-function-test'),
+  require('./user-defined-function-test'),
 ]
 
-const eva = new Eva(new Environment({
-  null: null,
+const eva = new Eva();
 
-  true: true,
-  false: false,
+tests.forEach(
+  (test) => test(eva)
+);
 
-  VERSION: '0.1'
-}));
-
-tests.forEach((test) => test(eva))
+eva.eval(['print', '"Hello,"', '"World!"']);
 
 console.log('All assertions passed!');

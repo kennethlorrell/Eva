@@ -42,9 +42,9 @@ module.exports = (eva) => {
         )
       )
         
-      (var fn (calc 10 20))
+      (var func (calc 10 20))
         
-      (fn 30)
+      (func 30)
     )
   `, 160);
 };
